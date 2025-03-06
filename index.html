@@ -38,174 +38,66 @@
         overflow-x: hidden;
       }
 
-      /* Loading Animation */
-      .loader-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--primary-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-      }
+      /* NEW LOADER STYLES */
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 9999;
+  overflow: hidden;
+}
 
-      .loader {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        perspective: 800px;
-      }
+.loader {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
 
-      .earth-loader {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: linear-gradient(45deg, #1a237e, #0d47a1, #01579b, #006064);
-        box-shadow: 0 0 30px rgba(33, 150, 243, 0.5);
-        animation: rotate 4s linear infinite;
-      }
+#loader-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 310px;  /* Set a fixed width */
+  height: 300px;
+}
 
-      .earth-loader::before {
-        content: "";
-        position: absolute;
-        top: -10px;
-        left: -10px;
-        right: -10px;
-        bottom: -10px;
-        border-radius: 50%;
-        border: 3px solid rgba(76, 175, 80, 0.5);
-        border-top-color: var(--accent-color);
-        border-bottom-color: var(--accent-color-2);
-        animation: rotate 3s linear infinite reverse;
-      }
+.loading-content {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+}
 
-      .earth-loader::after {
-        content: "";
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        bottom: 10px;
-        border-radius: 50%;
-        border: 2px dashed rgba(255, 255, 255, 0.3);
-        animation: rotate 10s linear infinite;
-      }
+.loading-text {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+  font-family: 'Segoe UI', sans-serif;
+}
 
-      .satellite-loader {
-        position: absolute;
-        width: 20px;
-        height: 8px;
-        background-color: #e0e0e0;
-        border-radius: 4px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        animation: orbit 3s linear infinite;
-      }
+.progress-container {
+  width: 300px;
+  height: 4cmpx;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin: 20px auto;
+}
 
-      .satellite-loader::before {
-        content: "";
-        position: absolute;
-        top: -8px;
-        left: 6px;
-        width: 8px;
-        height: 8px;
-        background-color: #bdbdbd;
-        border-radius: 2px;
-      }
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #2196f3, #4caf50);
+  transition: width 0.3s ease;
+}
 
-      .satellite-loader::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -15px;
-        width: 30px;
-        height: 2px;
-        background-color: var(--accent-color);
-        box-shadow: 0 0 5px var(--accent-color);
-        transform: rotate(45deg);
-      }
 
-      .loading-text {
-        margin-top: 30px;
-        font-size: 1.2rem;
-        color: var(--text-color);
-        letter-spacing: 3px;
-        position: relative;
-      }
 
-      .loading-text::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(
-          90deg,
-          var(--accent-color),
-          var(--accent-color-2)
-        );
-        animation: loading-line 2s ease-in-out infinite;
-      }
 
-      .loading-progress {
-        margin-top: 30px;
-        width: 200px;
-        height: 4px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border-radius: 2px;
-        overflow: hidden;
-      }
-
-      .progress-bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(
-          90deg,
-          var(--accent-color),
-          var(--accent-color-2)
-        );
-        border-radius: 2px;
-        transition: width 0.3s ease;
-      }
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      @keyframes orbit {
-        0% {
-          transform: rotate(0deg) translateX(90px) rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg) translateX(90px) rotate(-360deg);
-        }
-      }
-
-      @keyframes loading-line {
-        0% {
-          width: 0;
-          left: 0;
-        }
-        50% {
-          width: 100%;
-          left: 0;
-        }
-        100% {
-          width: 0;
-          left: 100%;
-        }
-      }
 
       /* Typography */
       h1,
@@ -1860,17 +1752,22 @@
     </style>
   </head>
   <body>
-    <!-- Loading Animation -->
-    <div class="loader-wrapper" id="loader">
-      <div class="loader">
-        <div class="earth-loader"></div>
-        <div class="satellite-loader"></div>
-      </div>
-      <div class="loading-text">LOADING</div>
-      <div class="loading-progress">
+    <!-- NEW LOADER -->
+<div class="loader-wrapper" id="loader">
+  <div class="loader">
+    <canvas id="loader-canvas"></canvas>
+    <div class="loading-content">
+      <div class="loading-text">WELCOME TO MY SPATIAL REALITY 🌍🚀</div>
+      <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
       </div>
     </div>
+  </div>
+</div>
+
+
+
+
 
     <!-- Header & Navigation -->
     <header>
@@ -1930,17 +1827,18 @@
           </div>
           <div class="about-text">
             <p>
-              Enthusiastic, fast learner, and creative GIS professional pursuing
-              MSc Geoinformatics with a strong academic foundation and a passion
-              for leveraging Geographic Information Systems and spatial data
-              analysis to address real-world challenges.
+              I am an enthusiastic, fast-learning, and creative GIS professional
+              with a Master’s degree in Geoinformatics. With a strong academic
+              foundation and a passion for leveraging Geographic Information
+              Systems and spatial data analysis, I strive to solve real-world
+              challenges through innovative geospatial solutions.
             </p>
             <p>
-              Proficient in GIS software such as ArcGIS Pro and Q-GIS, with a
+              Proficient in GIS software such as ArcGIS Pro and QGIS, I have a
               keen eye for detail and a commitment to precision in spatial data
-              management. Eager to apply my knowledge and skills to contribute
-              effectively to GIS projects and make a positive impact in the
-              field of geoinformatics.
+              management. My goal is to apply my expertise to impactful GIS
+              projects, contributing to meaningful advancements in the field of
+              geoinformatics.
             </p>
             <div class="about-stats">
               <div class="stat-item">
@@ -1979,7 +1877,7 @@
         <div class="portfolio-grid">
           <div class="portfolio-item micro-interaction" data-category="gis">
             <img
-              src="placeholder-project1.jpg"
+              src="UGS_gf.gif"
               alt="Urban Green Spaces Analysis"
               class="portfolio-img"
             />
@@ -1987,7 +1885,11 @@
               <h3 class="portfolio-title">Urban Green Spaces Analysis</h3>
               <p class="portfolio-category">GIS-Based Analysis</p>
               <div class="portfolio-links">
-                <a href="#" class="portfolio-link" title="View Project Details">
+                <a
+                  href="UGS_project.pdf"
+                  class="portfolio-link"
+                  title="View Project Details"
+                >
                   <i class="fas fa-link"></i>
                 </a>
                 <a href="#" class="portfolio-link" title="View Larger Image">
@@ -2001,7 +1903,7 @@
             data-category="remote-sensing"
           >
             <img
-              src="placeholder-project2.jpg"
+              src="Farm_pond_gf.gif"
               alt="Farm Ponds Impact Study"
               class="portfolio-img"
             />
@@ -2009,10 +1911,18 @@
               <h3 class="portfolio-title">Farm Ponds Impact Study</h3>
               <p class="portfolio-category">Remote Sensing & LULC Analysis</p>
               <div class="portfolio-links">
-                <a href="#" class="portfolio-link" title="View Project Details">
+                <a
+                  href="Farm_pond_project.pdf"
+                  class="portfolio-link"
+                  title="View Project Details"
+                >
                   <i class="fas fa-link"></i>
                 </a>
-                <a href="#" class="portfolio-link" title="View Larger Image">
+                <a
+                  href="Farm_pond_ppt.pdf"
+                  class="portfolio-link"
+                  title="View Larger Image"
+                >
                   <i class="fas fa-search"></i>
                 </a>
               </div>
@@ -2023,7 +1933,7 @@
             data-category="analysis"
           >
             <img
-              src="placeholder-project3.jpg"
+              src="Urban_crime.gif"
               alt="Urban Mortality Study"
               class="portfolio-img"
             />
@@ -2031,10 +1941,18 @@
               <h3 class="portfolio-title">Urban Mortality Study</h3>
               <p class="portfolio-category">Spatial Analysis</p>
               <div class="portfolio-links">
-                <a href="#" class="portfolio-link" title="View Project Details">
+                <a
+                  href="Urban_Crime_project.pdf"
+                  class="portfolio-link"
+                  title="View Project Details"
+                >
                   <i class="fas fa-link"></i>
                 </a>
-                <a href="#" class="portfolio-link" title="View Larger Image">
+                <a
+                  href="Thesis_Poster_page-0001 (1).jpg"
+                  class="portfolio-link"
+                  title="View Larger Image"
+                >
                   <i class="fas fa-search"></i>
                 </a>
               </div>
@@ -2055,8 +1973,8 @@
               Download my complete resume for a detailed overview of my skills,
               experience, and qualifications.
             </p>
-            <a href="your-cv.pdf" class="download-btn" download>
-              <i class="fas fa-download"></i> Download CV
+            <a href="TK_Resume.pdf" class="download-btn" download>
+              <i class="fas fa-download"></i> Download Resume
             </a>
           </div>
 
@@ -2065,21 +1983,28 @@
             <h3>My Journey in Geoinformatics</h3>
             <div class="story-timeline">
               <div class="story-step" data-step="1">
-                <h4 class="story-title">The Beginning</h4>
+                <h4 class="story-title">🌍 The Beginning</h4>
                 <p class="story-content">
                   My fascination with maps and spatial data began during my
-                  undergraduate studies. I was captivated by how geographical
-                  information could be visualized and analyzed to reveal
-                  patterns and insights that would otherwise remain hidden.
+                  undergraduate studies. While most people were using Google
+                  Maps to find the nearest coffee shop ☕, I was busy wondering
+                  how those maps were made in the first place. It amazed me how
+                  GIS could transform raw geographical data into meaningful
+                  insights kind of like magic 🎩.
                 </p>
               </div>
               <div class="story-step" data-step="2">
-                <h4 class="story-title">First GIS Project</h4>
+                <h4 class="story-title">🛰️ First GIS Project</h4>
                 <p class="story-content">
-                  My first significant project involved mapping urban green
-                  spaces in Pune. This experience taught me the fundamentals of
-                  spatial analysis and the importance of accurate data
-                  collection.
+                  My first major project involved analyzing the impact of farm
+                  ponds on land use and agriculture in Pandharpur. It turns out,
+                  these small water bodies do more than just store water 💧they
+                  quietly reshape farming patterns, boost horticulture 🌱, and
+                  influence local livelihoods. Using GIS-based spatial analysis
+                  and modeling, I uncovered how these changes unfolded over
+                  time. This project taught me the essentials of data
+                  collection, remote sensing, and why studying water bodies in
+                  peak summer ☀️ is a great way to find more dust than water.
                 </p>
               </div>
               <div class="story-image" data-step="3">
@@ -2089,20 +2014,23 @@
                 />
               </div>
               <div class="story-step" data-step="4">
-                <h4 class="story-title">Advancing Skills</h4>
+                <h4 class="story-title">🚀 Advancing Skills</h4>
                 <p class="story-content">
-                  As I progressed in my academic journey, I expanded my toolkit
-                  to include remote sensing technologies, advanced spatial
-                  analysis techniques, and programming skills to automate
-                  complex workflows.
+                  As I progressed, I expanded my GIS toolkit—moving beyond maps
+                  to remote sensing, spatial modeling, and Python scripting 🐍.
+                  Automating workflows made computers do the heavy lifting while
+                  I took the credit (and sipped coffee ☕). Efficiency at its
+                  finest!
                 </p>
               </div>
               <div class="story-step" data-step="5">
-                <h4 class="story-title">Current Focus</h4>
+                <h4 class="story-title">🔍 Current Focus</h4>
                 <p class="story-content">
-                  Today, I'm focused on integrating machine learning with GIS to
-                  develop innovative solutions for environmental monitoring and
-                  urban planning challenges.
+                  Today, I’m integrating programming 🤖 and GIS to tackle
+                  real-world challenges 🌆🌿. From city planning to land-use
+                  monitoring, my goal is to make spatial data smarter and more
+                  impactful. Maps should be more than just visually appealing 🗺️
+                  they should drive meaningful change for a better future.
                 </p>
               </div>
             </div>
@@ -2117,7 +2045,7 @@
             <div class="timeline-item">
               <div class="timeline-image">
                 <img
-                  src="placeholder-university1.jpg"
+                  src="SPPU_img.jpg"
                   alt="Savitribai Phule Pune University"
                 />
               </div>
@@ -2135,10 +2063,7 @@
             </div>
             <div class="timeline-item">
               <div class="timeline-image">
-                <img
-                  src="placeholder-university2.jpg"
-                  alt="SIR PARSHURAMBHAU COLLEGE"
-                />
+                <img src="SP_img.jpg" alt="SIR PARSHURAMBHAU COLLEGE" />
               </div>
               <div class="timeline-content">
                 <div class="timeline-date">December 2020 - June 2022</div>
@@ -2147,15 +2072,16 @@
                   SIR PARSHURAMBHAU COLLEGE, Pune
                 </div>
                 <p class="timeline-description">
-                  Achieved 83% with focus on geographical analysis and spatial
-                  patterns.
+                  Earning my MA in Geography was more than just academics it was a journey of 
+                  growth. Stepping out of my hometown, I met brilliant minds, gave speeches, 
+                  and transformed from an introvert to an ambivert, all while securing 83%!
                 </p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-image">
                 <img
-                  src="placeholder-university3.jpg"
+                  src="Bytco_img.jpg"
                   alt="R.N.C ARTS, J.D.B COMMERCE, NSC SCIENCE COLLEGE"
                 />
               </div>
@@ -2166,17 +2092,15 @@
                   R.N.C ARTS, J.D.B COMMERCE, NSC SCIENCE COLLEGE, Nashik
                 </div>
                 <p class="timeline-description">
-                  Completed with 70%, building a strong foundation in
-                  geographical concepts.
+                  Completed with 70%, exploring how geography shapes economies, 
+                  influences disasters, and drives population dynamics. It was
+                  here that I truly understood its role in shaping our world.
                 </p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-image">
-                <img
-                  src="placeholder-university4.jpg"
-                  alt="Nutan Vidyamandir"
-                />
+                <img src="Nutan_img.jpg" alt="Nutan Vidyamandir" />
               </div>
               <div class="timeline-content">
                 <div class="timeline-date">April 2015 - February 2017</div>
@@ -2185,8 +2109,9 @@
                   Nutan Vidyamandir, Deolali Camp, Bhagur, Nashik
                 </div>
                 <p class="timeline-description">
-                  Completed with 50%, focusing on scientific principles and
-                  analytical thinking.
+                  Completed 12th Science with a focus on Physics, Chemistry,
+                  Mathematics, and Biology, building a strong foundation in 
+                  scientific principles, analytical thinking, and problem-solving.
                 </p>
               </div>
             </div>
@@ -2209,16 +2134,16 @@
           <div class="map-gallery">
             <div class="map-item micro-interaction">
               <img
-                src="placeholder-map1.jpg"
+                src="Blender_Map.jpg"
                 alt="Urban Green Spaces Map"
                 class="map-img"
               />
-              <div class="map-overlay">
-                <h3 class="map-title">Urban Green Spaces Map</h3>
-                <p class="map-category">Pune City Analysis</p>
+                <div class="map-overlay">
+                <h3 class="map-title">3D LULC Map of Maharashtra State </h3>
+                <p class="map-category"> QGIS & Blender </p>
               </div>
-            </div>
-            <div class="map-item micro-interaction">
+           <!-- </div>
+             <div class="map-item micro-interaction">
               <img
                 src="placeholder-map2.jpg"
                 alt="Farm Ponds Distribution"
@@ -2227,7 +2152,7 @@
               <div class="map-overlay">
                 <h3 class="map-title">Farm Ponds Distribution</h3>
                 <p class="map-category">Pandharpur Tehsil, Solapur</p>
-              </div>
+              </div> 
             </div>
             <div class="map-item micro-interaction">
               <img
@@ -2253,7 +2178,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <!-- Skills Section -->
@@ -2265,7 +2190,7 @@
             <h3>GIS Software</h3>
             <div class="skill-item">
               <div class="skill-info">
-                <span class="skill-name">ArcGIS Pro</span>
+                <span class="skill-name">ArcGIS Pro, Desktop, Online</span>
                 <span class="skill-percentage">90%</span>
               </div>
               <div class="skill-bar">
@@ -2348,6 +2273,15 @@
               </div>
               <div class="skill-bar">
                 <div class="skill-progress" style="width: 70%"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span class="skill-name">AI Tools (Claude AI, Google Ai Studio, Gemini)</span>
+                <span class="skill-percentage">70%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-progress" style="width: 80%"></div>
               </div>
             </div>
           </div>
@@ -2451,10 +2385,11 @@
             </div>
           </div>
           <div class="contact-form">
-            <form id="contactForm">
+            <form id="contactForm" action="https://formspree.io/f/meoajerv" method="POST">
               <div class="form-group">
                 <input
                   type="text"
+                  name="name"
                   class="form-control"
                   placeholder="Your Name"
                   required
@@ -2463,16 +2398,18 @@
               <div class="form-group">
                 <input
                   type="email"
+                  name="email"
                   class="form-control"
                   placeholder="Your Email"
                   required
                 />
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject" />
+                <input type="text" name="subject" class="form-control" placeholder="Subject" />
               </div>
               <div class="form-group">
                 <textarea
+                  name="message"
                   class="form-control"
                   placeholder="Your Message"
                   required
@@ -2482,7 +2419,7 @@
                 Send Message
               </button>
             </form>
-          </div>
+          </div>          
         </div>
       </div>
       <div class="bg-animation" id="contact-bg"></div>
@@ -2527,52 +2464,92 @@
     </footer>
 
     <!-- JavaScript -->
+     
     <script>
-      // Loading Animation
-      document.addEventListener("DOMContentLoaded", function () {
-        const loader = document.getElementById("loader");
-        const progressBar = document.getElementById("progress-bar");
-        const loadingText = document.querySelector(".loading-text");
-        let dots = "";
-        let progress = 0;
+      // NEW LOADER CODE -------------------------
+function createLoaderAnimation() {
+  const canvas = document.getElementById('loader-canvas');
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
+  });
+  
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+  camera.position.z = 5;
 
-        // Animate loading text with dots
-        const textInterval = setInterval(() => {
-          dots = dots.length < 3 ? dots + "." : "";
-          loadingText.textContent = "LOADING" + dots;
-        }, 500);
+  // Earth
+  const earthGeometry = new THREE.SphereGeometry(1, 64, 64);
+  const earthTexture = new THREE.TextureLoader().load('https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg');
+  const earthMaterial = new THREE.MeshPhongMaterial({
+    map: earthTexture,
+    bumpScale: 0.05,
+    specular: new THREE.Color('grey'),
+    shininess: 15
+  });
+  const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+  scene.add(earth);
 
-        // Simulate loading progress
-        const progressInterval = setInterval(() => {
-          progress += Math.random() * 10;
-          if (progress > 100) progress = 100;
+  // Satellite
+  const satellite = createSatellite();
+  scene.add(satellite);
 
-          progressBar.style.width = progress + "%";
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0x404040);
+  scene.add(ambientLight);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 3, 5);
+  scene.add(directionalLight);
 
-          if (progress === 100) {
-            clearInterval(progressInterval);
-            clearInterval(textInterval);
+  // Animation
+  function animate() {
+    requestAnimationFrame(animate);
+    earth.rotation.y += 0.005;
+    satellite.position.x = Math.sin(Date.now() * 0.001) * 2.5;
+    satellite.position.z = Math.cos(Date.now() * 0.001) * 2.5;
+    satellite.position.y = Math.sin(Date.now() * 0.002) * 0.5;
+    satellite.lookAt(earth.position);
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    renderer.render(scene, camera);
+  }
+  animate();
+}
 
-            // Add a small delay before hiding the loader
-            setTimeout(() => {
-              loader.style.opacity = "0";
-              loader.style.visibility = "hidden";
+function createSatellite() {
+  const satellite = new THREE.Group();
+  // ... (keep the satellite creation code from previous answer)
+  return satellite;
+}
 
-              // Start animations after loader is hidden
-              setTimeout(() => {
-                createStars();
-                initEarth();
-                initEducationContours();
-                initBackgrounds();
-                enhanceTimelineItems();
-                enhanceSkillBars();
-                addRippleEffect();
-                setTimeout(animateStoryElements, 500);
-              }, 500);
-            }, 500);
-          }
-        }, 150);
-      });
+// Initialize loader
+document.addEventListener("DOMContentLoaded", function () {
+  createLoaderAnimation();
+  
+  const loader = document.getElementById("loader");
+  const progressBar = document.getElementById("progress-bar");
+  let progress = 0;
+
+  const loadingInterval = setInterval(() => {
+    progress += 1;
+    progressBar.style.width = progress + "%";
+    
+    if (progress >= 100) {
+      clearInterval(loadingInterval);
+      loader.style.opacity = "0";
+      loader.style.visibility = "hidden";
+      // Initialize main page
+      createStars();
+      initEarth();
+      initEducationContours();
+      initBackgrounds();
+      enhanceTimelineItems();
+      enhanceSkillBars();
+      addRippleEffect();
+      animateStoryElements();
+    }
+  }, 10);
+});
 
       // Mobile Menu Toggle
       const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
@@ -2754,8 +2731,8 @@
         function animate() {
           requestAnimationFrame(animate);
 
-          earth.rotation.y += 0.0005;
-          clouds.rotation.y += 0.0007;
+          earth.rotation.y += 0.002;
+          clouds.rotation.y += 0.0028;
 
           renderer.render(scene, camera);
         }
@@ -3341,99 +3318,94 @@
         }
       }
 
-      // Form submission with validation and microinteraction
-      document
-        .getElementById("contactForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      // Form submission with Formspree
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
+    
+    // Simple form validation
+    const name = this.querySelector('input[name="name"]').value;
+    const email = this.querySelector('input[name="email"]').value;
+    const message = this.querySelector('textarea[name="message"]').value;
 
-          // Simple form validation
-          const name = this.querySelector('input[type="text"]').value;
-          const email = this.querySelector('input[type="email"]').value;
-          const message = this.querySelector("textarea").value;
+    if (name.length < 2) {
+      showFormError(
+        this.querySelector('input[name="name"]'),
+        "Please enter a valid name"
+      );
+      return;
+    }
 
-          if (name.length < 2) {
-            showFormError(
-              this.querySelector('input[type="text"]'),
-              "Please enter a valid name"
-            );
-            return;
-          }
+    if (!email.includes("@") || !email.includes(".")) {
+      showFormError(
+        this.querySelector('input[name="email"]'),
+        "Please enter a valid email address"
+      );
+      return;
+    }
 
-          if (!email.includes("@") || !email.includes(".")) {
-            showFormError(
-              this.querySelector('input[type="email"]'),
-              "Please enter a valid email address"
-            );
-            return;
-          }
-
-          if (message.length < 10) {
-            showFormError(
-              this.querySelector("textarea"),
-              "Please enter a message with at least 10 characters"
-            );
-            return;
-          }
-
-          // If validation passes - add success animation
-          const submitBtn = this.querySelector(".submit-btn");
-          submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-          submitBtn.style.backgroundColor = "#4caf50";
-
-          // Add success animation to form
-          this.style.transition = "transform 0.5s ease";
-          this.style.transform = "scale(0.98)";
-          setTimeout(() => {
-            this.style.transform = "scale(1)";
-          }, 300);
-
-          // Reset form after delay
-          setTimeout(() => {
-            this.reset();
-            submitBtn.innerHTML = "Send Message";
-            submitBtn.style.backgroundColor = "";
-          }, 3000);
-        });
-
-      // Show form error
-      function showFormError(inputElement, message) {
-        // Create error message
-        let errorMsg = inputElement.parentNode.querySelector(".error-message");
-
-        if (!errorMsg) {
-          errorMsg = document.createElement("div");
-          errorMsg.className = "error-message";
-          errorMsg.style.color = "#ff5252";
-          errorMsg.style.fontSize = "0.9rem";
-          errorMsg.style.marginTop = "5px";
-          errorMsg.style.transform = "translateY(-10px)";
-          errorMsg.style.opacity = "0";
-          errorMsg.style.transition = "all 0.3s ease";
-          inputElement.parentNode.appendChild(errorMsg);
-        }
-
-        errorMsg.textContent = message;
-
-        // Highlight input
-        inputElement.style.borderColor = "#ff5252";
-        inputElement.style.boxShadow = "0 0 10px rgba(255, 82, 82, 0.2)";
-
-        // Show error message with animation
-        setTimeout(() => {
-          errorMsg.style.transform = "translateY(0)";
-          errorMsg.style.opacity = "1";
-        }, 10);
-
-        // Remove error after 3 seconds
-        setTimeout(() => {
-          inputElement.style.borderColor = "";
-          inputElement.style.boxShadow = "";
-          errorMsg.style.transform = "translateY(-10px)";
-          errorMsg.style.opacity = "0";
-        }, 3000);
+    if (message.length < 10) {
+      showFormError(
+        this.querySelector('textarea[name="message"]'),
+        "Please enter a message with at least 10 characters"
+      );
+      return;
+    }
+    
+    // If validation passes - show loading state
+    const submitBtn = this.querySelector(".submit-btn");
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    // Submit the form using fetch
+    fetch(this.action, {
+      method: this.method,
+      body: new FormData(this),
+      headers: {
+        'Accept': 'application/json'
       }
+    })
+    .then(response => {
+      if (response.ok) {
+        // Success message
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        submitBtn.style.backgroundColor = "#4caf50";
+        
+        // Add success animation to form
+        this.style.transition = "transform 0.5s ease";
+        this.style.transform = "scale(0.98)";
+        setTimeout(() => {
+          this.style.transform = "scale(1)";
+        }, 300);
+        
+        // Reset form after delay
+        setTimeout(() => {
+          this.reset();
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.style.backgroundColor = "";
+          submitBtn.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      submitBtn.innerHTML = '<i class="fas fa-times"></i> Error';
+      submitBtn.style.backgroundColor = "#f44336";
+      
+      setTimeout(() => {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.style.backgroundColor = "";
+        submitBtn.disabled = false;
+      }, 3000);
+    });
+  });
 
+
+      
       // Smooth scrolling for anchor links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
@@ -3475,3 +3447,5 @@
     </script>
   </body>
 </html>
+
+
